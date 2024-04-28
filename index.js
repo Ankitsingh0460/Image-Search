@@ -9,7 +9,10 @@ let inputData = "";
 let page = 1;
 
 async function searchImages() {
-  inputData = searchInputEl.value;
+  inputData = searchInputEl.value.trim();
+  if(inputData==="" || inputData.length()===0)
+    alert("The Search field is blank.Please try again");
+  else{
   const url = `https://api.unsplash.com/search/photos?page=${page}&query=${inputData}&client_id=${accessKey}`;
 
   const response = await fetch(url);
@@ -17,7 +20,7 @@ async function searchImages() {
   if (page === 1) {
     searchResultsEl.innerHTML = "";
   }
-
+  }
   const results = data.results;
 
   results.map((result) => {
